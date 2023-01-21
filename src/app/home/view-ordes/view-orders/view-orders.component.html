@@ -2,6 +2,9 @@
     <div class="table-title">Orders List</div>
     <ngx-table [configuration]="configuration" #table [data]="tableData" class="custom-table" [columns]="columns">
         <ng-template let-row>
+            <td *ngIf="role==='admin'">
+                <span class="font-small">{{row.user_name}}</span>
+            </td>
             <td>
                 <span class="font-small">{{row.category}}</span>
             </td>

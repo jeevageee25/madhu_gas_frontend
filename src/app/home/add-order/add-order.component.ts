@@ -42,7 +42,7 @@ export class AddOrderComponent implements OnInit {
     })
 
     const data = sessionStorage.getItem('orders');
-    if(data){
+    if (data) {
       this.inputForm.patchValue(JSON.parse(data));
       sessionStorage.removeItem('orders')
     }
@@ -56,6 +56,8 @@ export class AddOrderComponent implements OnInit {
     }
     const data = { ...this.inputForm.value };
     delete data._id;
+    const user: any = sessionStorage.getItem('user_info');
+    data.user_name = JSON.parse(user).user_name
     this.PService.addOrder(data).subscribe((res: any) => {
       this.toastService.showSuccessToaster('Success', 'Added Successfully !');
       this.inputForm.reset();

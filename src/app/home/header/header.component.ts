@@ -21,29 +21,17 @@ export class HeaderComponent implements OnInit {
     if (sessionStorage.getItem('role') === "admin") {
       this.pages = [
         { name: "Products", link: ['home', 'products'], icon: "pi pi-database" },
-        { name: "Orders", link: ['home', 'create-order'], icon: "pi pi-database" },
-        { name: "View Orders", link: ['home', 'view-order'], icon: "pi pi-database" },
+        { name: "Booked Orders", link: ['home', 'view-order'], icon: "pi pi-database" },
       ];
     }
     else {
       this.pages = [
-        { name: "Order", link: ['home', 'products'], icon: "pi pi-database" },
-        { name: "Order List", link: ['home', 'products'], icon: "pi pi-database" },
+        { name: "Orders", link: ['home', 'create-order'], icon: "pi pi-database" },
+        { name: "Booked Orders", link: ['home', 'view-order'], icon: "pi pi-database" },
       ];
     }
-    const session: any = sessionStorage.getItem('previledge');
-    const previlege: any = JSON.parse(session);
-    const data = previlege?.filter((v: any) => v.view);
-    const views = data.map((v: any) => v.screen);
-    this.pages = this.pages.filter((p: any) => views.includes(p.name));
-    if (this.pages.length === 0) {
-      sessionStorage.clear();
-      this.ts.showWarningToaster('Warning', 'No Previledges given. Please contact administrator');
-      this.router.navigate(['login']);
-    }
-    else {
+     
       this.router.navigate([this.pages[0].link.join('/')])
-    }
   }
 
   handleChange(event: any) {

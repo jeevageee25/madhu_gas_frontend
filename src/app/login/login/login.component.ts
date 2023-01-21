@@ -48,7 +48,8 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['/products'])
     }
     else {
-      sessionStorage.setItem('role', 'customer')
+      sessionStorage.setItem('role', 'customer');
+      this.router.navigate(['/create-order'])
     }
   }
 

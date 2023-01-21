@@ -36,10 +36,22 @@ export class ViewOrdersComponent implements OnInit {
       { key: 'address', title: 'Address' },
       { key: '', title: 'Actions' }
     ];
+
+    const role = sessionStorage.getItem('role');
+    if (role !== 'customer') {
+      this.columns.unshift({ key: 'user_name', title: 'User Name' },)
+    }
   }
 
   searchOrders() {
-    this.PService.getOrders({ search_key: {} }).subscribe((res: any) => {
+    const user: any = sessionStorage.getItem('user_info');
+    const user_name = JSON.parse(user).user_name
+    let payload: any = { search_key: {} };
+    const role = sessionStorage.getItem('role');
+    if (role === 'customer') {
+      payload.search_key = { user_name: user_name }
+    }
+    this.PService.getOrders(payload).subscribe((res: any) => {
       this.tableData = res?.data || []
     }, e => {
       this.toastService.showErrorToaster('Error', 'Something went wrong !. Please try again later.');
@@ -51,12 +63,12 @@ export class ViewOrdersComponent implements OnInit {
     this.router.navigate(['/create-order'])
   }
 
-  deleteRow(row:any){
+  deleteRow(row: any) {
     this.PService.deleteOrders(row._id).subscribe((res: any) => {
-      this.toastService.showSuccessToaster('Success','Deleted Successfully !');
+      this.toastService.showSuccessToaster('Success', 'Deleted Successfully !');
       this.searchOrders();
-    },e=>{
-      this.toastService.showErrorToaster('Error','Something went wrong !. Please try again later.');
+    }, e => {
+      this.toastService.showErrorToaster('Error', 'Something went wrong !. Please try again later.');
     })
   }
 
@@ -74,5 +86,9 @@ export class ViewOrdersComponent implements OnInit {
 
       }
     });
+  }
+
+  get role() {
+    return sessionStorage.getItem('role')
   }
 }
