@@ -32,7 +32,7 @@ export class HeaderComponent implements OnInit {
       ];
     }
      
-      this.router.navigate([this.pages[0].link.join('/')])
+      // this.router.navigate([this.pages[0].link.join('/')])
   }
 
   handleChange(event: any) {
