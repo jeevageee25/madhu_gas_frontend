@@ -22,8 +22,8 @@ export class AddOrderComponent implements OnInit {
   constructor(private confirmationService: ConfirmationService, private toastService: ToastService, private fb: FormBuilder, private PService: ProductsService) { }
 
   ngOnInit(): void {
-    this.createForm();
     this.searchProducts();
+    this.createForm();
   }
 
   createForm() {
@@ -40,12 +40,6 @@ export class AddOrderComponent implements OnInit {
       pincode: ['', Validators.required],
       phone: ['', Validators.required],
     })
-
-    const data = sessionStorage.getItem('orders');
-    if (data) {
-      this.inputForm.patchValue(JSON.parse(data));
-      sessionStorage.removeItem('orders')
-    }
   }
 
   addOrder() {
@@ -82,7 +76,14 @@ export class AddOrderComponent implements OnInit {
 
   searchProducts() {
     this.PService.getProducts({ search_key: {} }).subscribe((res: any) => {
-      this.products = res?.data || []
+      this.products = res?.data || [];
+      const data = sessionStorage.getItem('orders');
+      if (data) {
+        this.inputForm.patchValue(JSON.parse(data));
+        setTimeout(()=>{
+        this.inputForm.patchValue(JSON.parse(data));
+        },100)
+      }
     }, e => {
       this.toastService.showErrorToaster('Error', 'Something went wrong !. Please try again later.');
     })
