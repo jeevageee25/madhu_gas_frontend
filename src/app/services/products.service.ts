@@ -36,4 +36,8 @@ export class ProductsService {
   addOrder(payload:any){
     return this.http.post(environment.apiurl + `api/order/create`, payload)
   }
+
+  getOrders(payload:any){
+    return this.http.post(environment.apiurl + `api/orders/search`, payload)
+  }
 }

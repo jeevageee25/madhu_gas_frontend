@@ -1,0 +1,25 @@
+<div class="row">
+    <div class="table-title">Products List</div>
+    <ngx-table [configuration]="configuration" #table [data]="tableData" class="custom-table" [columns]="columns">
+        <ng-template let-row>
+            <td>
+                <span class="font-small">{{row.name}}</span>
+            </td>
+            <td>
+                <span class="font-small">{{row.category}}</span>
+            </td>
+            <td>
+                <span class="font-small">{{row.price}}</span>
+            </td>
+            <td>
+                <span class="font-small">
+                    <i class="pi pi-pencil" (click)="editRow(row)"></i>
+                </span>
+                &nbsp;&nbsp;
+                <span class="font-small">
+                    <i class="pi pi-trash" (click)="confirm($event, row)"></i>
+                </span>
+            </td>
+        </ng-template>
+    </ngx-table>
+</div>
