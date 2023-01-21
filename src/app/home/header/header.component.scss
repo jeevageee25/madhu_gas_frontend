@@ -1,0 +1,19 @@
+::ng-deep .p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link {
+    background: #ffffff;
+    border-color: #ea5600;
+    color: #ea5600;
+}
+
+.logout {
+    background: #fff;
+    position: relative;
+    display: flex;
+    align-self: center;
+    position: relative;
+    right: 25px;
+    cursor: pointer;
+}
+
+.logout:hover {
+    color: #ea5600;
+}

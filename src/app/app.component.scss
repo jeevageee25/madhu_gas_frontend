@@ -1,0 +1,22 @@
+::ng-deep .ngx-pagination .current {
+    padding: 0.1875rem 0.625rem;
+    background: #f39e57;
+    color: #fefefe;
+    cursor: default;
+}
+
+::ng-deep .ngx-table__header-search{
+    padding: 20px 5px;
+}
+
+::ng-deep .ngx-table__table--hoverable > tbody tr:nth-child(odd) {
+    background: #fcf7f4;
+}
+
+::ng-deep .p-calendar-w-btn .p-datepicker-trigger {
+    background: #719e36;
+}
+
+::ng-deep .p-calendar-w-btn .p-datepicker-trigger:hover {
+    background: #719e36;
+}
