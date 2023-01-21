@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Config, DefaultConfig, Columns } from 'ngx-easy-table';
 import { ConfirmationService } from 'primeng/api';
 import { ProductsService } from 'src/app/services/products.service';
@@ -15,7 +16,7 @@ export class ViewOrdersComponent implements OnInit {
   columns: Columns[] = [];
   tableData = [];
 
-  constructor(private confirmationService: ConfirmationService, private toastService: ToastService, private fb: FormBuilder, private PService: ProductsService) { }
+  constructor(private router: Router, private confirmationService: ConfirmationService, private toastService: ToastService, private fb: FormBuilder, private PService: ProductsService) { }
 
   ngOnInit(): void {
     this.initTable();
@@ -46,12 +47,19 @@ export class ViewOrdersComponent implements OnInit {
   }
 
   editRow(row: any) {
-
+    sessionStorage.setItem('orders', JSON.stringify(row))
+    this.router.navigate(['/create-order'])
   }
 
-  deleteRow(row: any) {
-
+  deleteRow(row:any){
+    this.PService.deleteOrders(row._id).subscribe((res: any) => {
+      this.toastService.showSuccessToaster('Success','Deleted Successfully !');
+      this.searchOrders();
+    },e=>{
+      this.toastService.showErrorToaster('Error','Something went wrong !. Please try again later.');
+    })
   }
+
 
   confirm(event: Event, row: any) {
     const target: any = event.target;

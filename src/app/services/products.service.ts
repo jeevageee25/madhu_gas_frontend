@@ -40,4 +40,13 @@ export class ProductsService {
   getOrders(payload:any){
     return this.http.post(environment.apiurl + `api/orders/search`, payload)
   }
+
+  updateOrders(payload:any){
+    return this.http.post(environment.apiurl + `api/order/update`, payload)
+  }
+
+  deleteOrders(_id:any){
+    return this.http.delete(environment.apiurl + `api/order/delete/${_id}`)
+  } 
+
 }

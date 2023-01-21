@@ -33,7 +33,7 @@ export class HeaderComponent implements OnInit {
     }
     const session: any = sessionStorage.getItem('previledge');
     const previlege: any = JSON.parse(session);
-    const data = previlege.filter((v: any) => v.view);
+    const data = previlege?.filter((v: any) => v.view);
     const views = data.map((v: any) => v.screen);
     this.pages = this.pages.filter((p: any) => views.includes(p.name));
     if (this.pages.length === 0) {

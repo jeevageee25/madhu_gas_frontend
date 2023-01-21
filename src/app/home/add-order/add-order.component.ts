@@ -40,6 +40,12 @@ export class AddOrderComponent implements OnInit {
       pincode: ['', Validators.required],
       phone: ['', Validators.required],
     })
+
+    const data = sessionStorage.getItem('orders');
+    if(data){
+      this.inputForm.patchValue(JSON.parse(data));
+      sessionStorage.removeItem('orders')
+    }
   }
 
   addOrder() {
@@ -64,7 +70,7 @@ export class AddOrderComponent implements OnInit {
       this.inputForm.markAllAsTouched();
       return;
     }
-    this.PService.updateProducts(this.inputForm.value).subscribe((res: any) => {
+    this.PService.updateOrders(this.inputForm.value).subscribe((res: any) => {
       this.toastService.showSuccessToaster('Success', 'Updated Successfully !');
       this.inputForm.reset();
     }, e => {
