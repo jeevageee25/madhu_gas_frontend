@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
       if (res && res.data.length) {
         sessionStorage.setItem('user_info', JSON.stringify(res.data[0]))
         this.toast.showSuccessToaster('Success', 'Logged in ');
-        this.searchRole(res.data[0].role)
+        this.navigateRole(res.data[0].previledges[0])
       }
       else {
         this.toast.showWarningToaster('Warning', 'Wrong Credentials. Please try again.');
@@ -42,8 +42,14 @@ export class LoginComponent implements OnInit {
 
   }
 
-  searchRole(role: any) {
-    this.router.navigate(['/products'])
+  navigateRole(role: any) {
+    if (role === "admin") {
+      sessionStorage.setItem('role', 'admin')
+      this.router.navigate(['/products'])
+    }
+    else {
+      sessionStorage.setItem('role', 'customer')
+    }
   }
 
 }

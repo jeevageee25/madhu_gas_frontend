@@ -18,9 +18,18 @@ export class HeaderComponent implements OnInit {
   }
 
   initPages() {
-    this.pages = [
-      { name: "Products", link: ['home', 'products'], icon: "pi pi-database" },
-    ];
+    if (sessionStorage.getItem('role') === "admin") {
+      this.pages = [
+        { name: "Products", link: ['home', 'products'], icon: "pi pi-database" },
+        { name: "Orders", link: ['home', 'products'], icon: "pi pi-database" },
+      ];
+    }
+    else {
+      this.pages = [
+        { name: "Order", link: ['home', 'products'], icon: "pi pi-database" },
+        { name: "Order List", link: ['home', 'products'], icon: "pi pi-database" },
+      ];
+    }
     const session: any = sessionStorage.getItem('previledge');
     const previlege: any = JSON.parse(session);
     const data = previlege.filter((v: any) => v.view);
