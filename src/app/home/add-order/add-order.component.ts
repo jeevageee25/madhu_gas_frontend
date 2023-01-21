@@ -12,104 +12,78 @@ import { ToastService } from 'src/app/services/toast.service';
 })
 export class AddOrderComponent implements OnInit {
 
-  inputForm: FormGroup=new FormGroup({});
+  inputForm: FormGroup = new FormGroup({});
   categories: any = ['Domestic', 'Commercial'];
   configuration: Config = { ...DefaultConfig };
   columns: Columns[] = [];
   tableData = [];
+  products = [];
 
-  constructor( private confirmationService: ConfirmationService, private toastService: ToastService, private fb: FormBuilder, private PService: ProductsService) { }
+  constructor(private confirmationService: ConfirmationService, private toastService: ToastService, private fb: FormBuilder, private PService: ProductsService) { }
 
   ngOnInit(): void {
     this.createForm();
     this.searchProducts();
-    this.initTable();
-  }
-
-  initTable() {
-    this.configuration = { ...DefaultConfig };
-    this.configuration.rows = 10;
-    this.columns = [
-      { key: 'name', title: 'Product' },
-      { key: 'category', title: 'Category' },
-      { key: 'price', title: 'Rate' },
-      { key: '', title: 'Actions' }
-    ];
   }
 
   createForm() {
     this.inputForm = this.fb.group({
-      _id:[],
-      name: ['', Validators.required],
+      _id: [],
       category: ['', Validators.required],
-      price: ['', Validators.required]
+      product: ['', Validators.required],
+      count: ['', Validators.required],
+      expected_delivery: ['', Validators.required],
+      first_name: ['', Validators.required],
+      last_name: ['', Validators.required],
+      address1: ['', Validators.required],
+      address2: ['', Validators.required],
+      pincode: ['', Validators.required],
+      phone: ['', Validators.required],
     })
   }
 
-  addProducts() {
-    if(this.inputForm.invalid){
-      this.toastService.showWarningToaster('Warning','Please fill all the Mandatory Fields !');
+  addOrder() {
+    if (this.inputForm.invalid) {
+      this.toastService.showWarningToaster('Warning', 'Please fill all the Mandatory Fields !');
+      this.inputForm.markAllAsTouched();
       return;
     }
-    const { name, category, price } = this.inputForm.value;
-    this.PService.addProducts({ name, category, price }).subscribe((res: any) => {
-      this.toastService.showSuccessToaster('Success','Added Successfully !');
-      this.searchProducts();
+    const data = { ...this.inputForm.value };
+    delete data._id;
+    this.PService.addOrder(data).subscribe((res: any) => {
+      this.toastService.showSuccessToaster('Success', 'Added Successfully !');
       this.inputForm.reset();
-    },e=>{
-      this.toastService.showErrorToaster('Error','Something went wrong !. Please try again later.');
+    }, e => {
+      this.toastService.showErrorToaster('Error', 'Something went wrong !. Please try again later.');
     })
   }
 
-  updateProduct(){
-    if(this.inputForm.invalid){
-      this.toastService.showWarningToaster('Warning','Please fill all the Mandatory Fields !');
+  updateProduct() {
+    if (this.inputForm.invalid) {
+      this.toastService.showWarningToaster('Warning', 'Please fill all the Mandatory Fields !');
+      this.inputForm.markAllAsTouched();
       return;
     }
-    const {_id, name, category, price } = this.inputForm.value;
-    this.PService.updateProducts({ _id, name, category, price }).subscribe((res: any) => {
-      this.toastService.showSuccessToaster('Success','Updated Successfully !');
-      this.searchProducts();
+    this.PService.updateProducts(this.inputForm.value).subscribe((res: any) => {
+      this.toastService.showSuccessToaster('Success', 'Updated Successfully !');
       this.inputForm.reset();
-    },e=>{
-      this.toastService.showErrorToaster('Error','Something went wrong !. Please try again later.');
-    })
-  }
-
-  deleteProduct(row:any){
-    this.PService.deleteProducts(row._id).subscribe((res: any) => {
-      this.toastService.showSuccessToaster('Success','Deleted Successfully !');
-      this.searchProducts();
-    },e=>{
-      this.toastService.showErrorToaster('Error','Something went wrong !. Please try again later.');
+    }, e => {
+      this.toastService.showErrorToaster('Error', 'Something went wrong !. Please try again later.');
     })
   }
 
   searchProducts() {
     this.PService.getProducts({ search_key: {} }).subscribe((res: any) => {
-      this.tableData = res?.data || []
-    },e=>{
-      this.toastService.showErrorToaster('Error','Something went wrong !. Please try again later.');
+      this.products = res?.data || []
+    }, e => {
+      this.toastService.showErrorToaster('Error', 'Something went wrong !. Please try again later.');
     })
   }
 
-  editRow(row:any){
-    this.inputForm.patchValue(row);
+  get Products() {
+    const { category } = this.inputForm.value;
+    let data = category && this.products && this.products.filter((p: any) => p.category === category) || [];
+    return data.map((d: any) => d.name)
   }
-
-  confirm(event: Event, row:any) {
-    const target:any = event.target;
-    this.confirmationService.confirm({
-      target,
-      message: "Are you sure that you want to proceed?",
-      icon: "pi pi-exclamation-triangle",
-      accept: () => {
-        this.deleteProduct(row);
-      },
-      reject: () => {
-       
-      }
-    });
-}
 
 }

@@ -3,31 +3,93 @@
         <div class="col-md-12">
             <form [formGroup]="inputForm">
                 <div class="row ">
-                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-xs-12">
-                        <div class="form-group">
-                            <div class="custom-label">Product Name <span class='mandate'>*</span></div>
-                            <input style='width: 100%;' autocomplete="off" type="text" id="name" pInputText
-                                formControlName="name" placeholder="Enter Product Name">
-                        </div>
-                    </div>
                     <div class="ccol-xl-3 col-lg-3 col-md-3 col-sm-12 col-xs-12">
                         <div class="form-group">
-                            <div class="custom-label">Category <span class='mandate'>*</span></div>
+                            <div class="custom-label">Category<span class='mandate'>*</span></div>
                             <p-dropdown class="custom-pdropdown" formControlName="category" [options]="categories"
                                 [placeholder]="'Select Category'">
                             </p-dropdown>
                         </div>
                     </div>
-                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                    <div class="ccol-xl-3 col-lg-3 col-md-3 col-sm-12 col-xs-12">
                         <div class="form-group">
-                            <div class="custom-label">Rate <span class='mandate'>*</span></div>
-                            <input style='width: 100%;' autocomplete="off" type="number" id="rate" pInputText
-                                formControlName="price" placeholder="Enter Rate">
+                            <div class="custom-label">Products<span class='mandate'>*</span></div>
+                            <p-dropdown class="custom-pdropdown" formControlName="product" [options]="Products"
+                                [placeholder]="'Select Products'">
+                            </p-dropdown>
                         </div>
                     </div>
-                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-xs-12" style="margin-top:10px;align-self: flex-end !important;">
-                        <button *ngIf="!inputForm.value._id" pButton pRipple type="button" (click)='addProducts()' label="Add" class="p-button-success"></button>
-                        <button *ngIf="inputForm.value._id" pButton pRipple type="button" (click)='updateProduct()' label="Update" class="p-button-success"></button>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                        <div class="form-group">
+                            <div class="custom-label">Number of products<span class='mandate'>*</span></div>
+                            <input style='width: 100%;' autocomplete="off" type="number" id="rate" pInputText
+                                formControlName="count" placeholder="Enter Number of products">
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                        <div class="form-group">
+                            <div class="custom-label">Expected Delivery Date<span class='mandate'>*</span></div>
+                            <p-calendar formControlName="expected_delivery"
+                                placeholder="Enter Expected Delivery Date" [showIcon]="true"></p-calendar>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <b style="font-size: 20px;
+                font-weight: 500;
+                padding-left: 11px;"> Delivery Address:</b>
+                <br>
+                <br>
+                <div class="row ">
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                        <div class="form-group">
+                            <div class="custom-label">First Name <span class='mandate'>*</span></div>
+                            <input style='width: 100%;' autocomplete="off" type="text" id="rate" pInputText
+                                formControlName="first_name" placeholder="Enter First Name">
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                        <div class="form-group">
+                            <div class="custom-label">Last Name <span class='mandate'>*</span></div>
+                            <input style='width: 100%;' autocomplete="off" type="text" id="rate" pInputText
+                                formControlName="last_name" placeholder="Enter Last Name ">
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                        <div class="form-group">
+                            <div class="custom-label">Address Line 1 <span class='mandate'>*</span></div>
+                            <input style='width: 100%;' autocomplete="off" type="text" id="rate" pInputText
+                                formControlName="address1" placeholder="Enter Address Line 1">
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                        <div class="form-group">
+                            <div class="custom-label">Address Line 2 <span class='mandate'>*</span></div>
+                            <input style='width: 100%;' autocomplete="off" type="text" id="rate" pInputText
+                                formControlName="address2" placeholder="Enter Address Line 2">
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                        <div class="form-group">
+                            <div class="custom-label">Pincode<span class='mandate'>*</span></div>
+                            <input style='width: 100%;' autocomplete="off" type="text" id="rate" pInputText
+                                formControlName="pincode" placeholder="Enter Pincode">
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                        <div class="form-group">
+                            <div class="custom-label">Phone<span class='mandate'>*</span></div>
+                            <input style='width: 100%;' autocomplete="off" type="number" id="rate" pInputText
+                                formControlName="phone" placeholder="Enter Phone">
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-xs-12"
+                        style="margin-top:10px;align-self: flex-end !important;">
+                        <button *ngIf="!inputForm.value._id" pButton pRipple type="button" (click)='addOrder()'
+                            label="Add" class="p-button-success"></button>
+                        <button *ngIf="inputForm.value._id" pButton pRipple type="button" (click)='updateProduct()'
+                            label="Update" class="p-button-success"></button>
                         &nbsp; &nbsp;
                         <button pButton pRipple type="reset" label="Reset" class="p-button-warning"></button>
                     </div>
@@ -36,29 +98,4 @@
         </div>
     </div>
     <br />
-    <div class="row">
-        <div class="table-title">Products List</div>
-        <ngx-table [configuration]="configuration" #table [data]="tableData" class="custom-table" [columns]="columns">
-            <ng-template let-row>
-                <td>
-                    <span class="font-small">{{row.name}}</span>
-                </td>
-                <td>
-                    <span class="font-small">{{row.category}}</span>
-                </td>
-                <td>
-                    <span class="font-small">{{row.price}}</span>
-                </td>
-                <td>
-                    <span class="font-small">
-                        <i class="pi pi-pencil" (click)="editRow(row)"></i>
-                    </span>
-                    &nbsp;&nbsp;
-                    <span class="font-small">
-                        <i class="pi pi-trash" (click)="confirm($event, row)"></i>
-                    </span>
-                </td>
-            </ng-template>
-        </ngx-table>
-    </div>
 </div>

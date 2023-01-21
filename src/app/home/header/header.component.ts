@@ -21,7 +21,7 @@ export class HeaderComponent implements OnInit {
     if (sessionStorage.getItem('role') === "admin") {
       this.pages = [
         { name: "Products", link: ['home', 'products'], icon: "pi pi-database" },
-        { name: "Orders", link: ['home', 'products'], icon: "pi pi-database" },
+        { name: "Orders", link: ['home', 'create-order'], icon: "pi pi-database" },
       ];
     }
     else {
