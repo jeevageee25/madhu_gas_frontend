@@ -1,15 +1,27 @@
 <div class="row">
-    <div class="table-title">Products List</div>
+    <div class="table-title">Orders List</div>
     <ngx-table [configuration]="configuration" #table [data]="tableData" class="custom-table" [columns]="columns">
         <ng-template let-row>
-            <td>
-                <span class="font-small">{{row.name}}</span>
-            </td>
             <td>
                 <span class="font-small">{{row.category}}</span>
             </td>
             <td>
-                <span class="font-small">{{row.price}}</span>
+                <span class="font-small">{{row.product}}</span>
+            </td>
+            <td>
+                <span class="font-small">{{row.count}}</span>
+            </td>
+            <td>
+                <span class="font-small">{{row.expected_delivery | date}}</span>
+            </td>
+            <td>
+                <span class="font-small">{{row.first_name}} {{row.last_name}}</span>
+            </td>
+            <td>
+                <span class="font-small">{{row.phone}}</span>
+            </td>
+            <td>
+                <span class="font-small">{{row.address1}}, {{row.address2}}, {{row.pincode}}</span>
             </td>
             <td>
                 <span class="font-small">
