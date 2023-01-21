@@ -90,8 +90,8 @@ export class AddOrderComponent implements OnInit {
 
   get Products() {
     const { category } = this.inputForm.value;
-    let data = category && this.products && this.products.filter((p: any) => p.category === category) || [];
-    return data.map((d: any) => d.name)
+    let data = category && this.products && this.products?.filter((p: any) => p.category === category) || [];
+    return data && data?.map((d: any) => d.name) || [];
   }
 
 }
