@@ -53,7 +53,7 @@ export class AddOrderComponent implements OnInit {
     const user: any = sessionStorage.getItem('user_info');
     data.user_name = JSON.parse(user).user_name
     this.PService.addOrder(data).subscribe((res: any) => {
-      this.toastService.showSuccessToaster('Success', 'Added Successfully !');
+      this.toastService.showSuccessToaster('Success', 'Booked Successfully !');
       this.inputForm.reset();
     }, e => {
       this.toastService.showErrorToaster('Error', 'Something went wrong !. Please try again later.');
