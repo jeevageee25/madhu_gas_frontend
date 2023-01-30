@@ -31,7 +31,9 @@ export class ProductsService {
     return this.http.post(environment.apiurl + `api/executive/search`, payload)
   }
  
-
+  addEmployee(payload:any){
+    return this.http.post(environment.apiurl + `api/executive/add`, payload)
+  }
   //Orders
   addOrder(payload:any){
     return this.http.post(environment.apiurl + `api/order/create`, payload)
