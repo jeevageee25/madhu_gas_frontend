@@ -11,7 +11,7 @@ import { ToastService } from 'src/app/services/toast.service';
 })
 export class LoginComponent implements OnInit {
   inputForm: FormGroup = new FormGroup({});
-
+page:string = "Admin";
   constructor(private fb: FormBuilder, private ps: ProductsService, private toast: ToastService, private router: Router) { }
 
   ngOnInit(): void {

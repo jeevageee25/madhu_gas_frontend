@@ -41,4 +41,8 @@ export class RegistrationComponent implements OnInit {
 
   }
 
+  onloginclick(){
+    this.router.navigate(['/login'])
+  }
+
 }

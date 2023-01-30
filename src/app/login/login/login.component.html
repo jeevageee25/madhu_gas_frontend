@@ -2,14 +2,14 @@
     <div class="row" style="position: absolute;">
         <div class=" col-sm-4 col-xs-4">
             <button style='width: 100%;width: 170px;' pButton pRipple type="button" label="Admin Login"
-                class="p-button-warning"></button>
+                class="p-button-warning" (click)="page='Admin'"></button>
         </div>
         <div class=" col-sm-4 col-xs-4" style="margin-bottom:10px">
             <button style='width: 100%;width: 170px;' pButton pRipple type="button" label="New User"
                 (click)="onnewUserclick()" class="p-button-success"></button>
         </div>
         <div class=" col-sm-4 col-xs-4">
-            <button style='width: 100%;width: 170px;' pButton pRipple type="button" label="Existing User"
+            <button style='width: 100%;width: 170px;' (click)="page='Customer'" pButton pRipple type="button" label="Existing User"
                 class="p-button-warning"></button>
         </div>
     </div>
@@ -18,7 +18,10 @@
     <div class="col-md-4 card">
         <form [formGroup]="inputForm">
             <div class="column" style="background: #fff;">
-                <div class=" col-xs-12">
+                <b>{{page}} Login</b>
+                <br />
+                <br />
+                <div class="col-xs-12">
                     <div class="form-group">
                         <div class="custom-label">Login <span class='mandate'>*</span></div>
                         <input style='width: 100%;' autocomplete="off" type="text" id="name" pInputText
