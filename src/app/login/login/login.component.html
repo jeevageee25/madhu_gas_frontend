@@ -1,3 +1,19 @@
+<div style="display: flex;justify-content: end;position: relative;top: 14px;">
+    <div class="row" style="position: absolute;">
+        <div class=" col-sm-4 col-xs-4">
+            <button style='width: 100%;width: 170px;' pButton pRipple type="button" label="Admin Login"
+                class="p-button-warning"></button>
+        </div>
+        <div class=" col-sm-4 col-xs-4" style="margin-bottom:10px">
+            <button style='width: 100%;width: 170px;' pButton pRipple type="button" label="New User"
+                (click)="onnewUserclick()" class="p-button-success"></button>
+        </div>
+        <div class=" col-sm-4 col-xs-4">
+            <button style='width: 100%;width: 170px;' pButton pRipple type="button" label="Existing User"
+                class="p-button-warning"></button>
+        </div>
+    </div>
+</div>
 <div class="row wrap header">
     <div class="col-md-4 card">
         <form [formGroup]="inputForm">
@@ -19,10 +35,12 @@
                 <br />
                 <div class="row">
                     <div class=" col-sm-6 col-xs-6" style="margin-bottom:10px">
-                        <button style='width: 100%;' pButton pRipple type="button" label="Login" (click)="onloginClick()" class="p-button-success"></button>
+                        <button style='width: 100%;' pButton pRipple type="button" label="Login"
+                            (click)="onloginClick()" class="p-button-success"></button>
                     </div>
                     <div class=" col-sm-6 col-xs-6">
-                        <button style='width: 100%;' pButton pRipple type="reset" label="Reset" class="p-button-warning"></button>
+                        <button style='width: 100%;' pButton pRipple type="reset" label="Reset"
+                            class="p-button-warning"></button>
                     </div>
                 </div>
             </div>
