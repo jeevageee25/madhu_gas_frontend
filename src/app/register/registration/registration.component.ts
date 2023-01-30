@@ -35,7 +35,7 @@ export class RegistrationComponent implements OnInit {
       return
     }
     this.ps.addEmployee({ ...this.inputForm.value, previledges: ['customer'] }).subscribe(res => {
-      this.toast.showWarningToaster('Success', 'Successfully Registered');
+      this.toast.showSuccessToaster('Success', 'Successfully Registered');
       this.router.navigate(['/login'])
     })
 
