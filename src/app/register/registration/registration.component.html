@@ -12,7 +12,7 @@
             <input style='width: 100%;' autocomplete="off" type="text" id="rate" pInputText
                 formControlName="first_name" placeholder="Enter First Name">
                 <ng-container *ngIf="companyInfoFormControl['first_name']?.errors?.['pattern']">
-                    <span class="custom-error-text">First Name is Invalid</span>
+                    <span class="custom-error-text">Only Alphabets are allowed</span>
                 </ng-container>
         </div>
     </div>
@@ -22,7 +22,7 @@
             <input style='width: 100%;' autocomplete="off" type="text" id="rate" pInputText
                 formControlName="last_name" placeholder="Enter Last Name ">
                 <ng-container *ngIf="companyInfoFormControl['last_name']?.errors?.['pattern']">
-                    <span class="custom-error-text">Last Name is Invalid</span>
+                    <span class="custom-error-text">Only Alphabets are allowed</span>
                 </ng-container>
         </div>
     </div>
