@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ProductsService } from 'src/app/services/products.service';
 import { ToastService } from 'src/app/services/toast.service';
+import * as GC from 'src/app/shared/globalConstants.contants'
 
 @Component({
   selector: 'app-registration',
@@ -20,11 +21,11 @@ export class RegistrationComponent implements OnInit {
 
   createForm() {
     this.inputForm = this.fb.group({
-      first_name: ['', Validators.required],
-      last_name: ['', Validators.required],
+      first_name: ['',  [Validators.pattern(GC.REGEX.ALPHA), Validators.required]],
+      last_name: ['',  [Validators.pattern(GC.REGEX.ALPHA), Validators.required]],
       user_name: ['', Validators.required],
       password: ['', Validators.required],
-      phone: ['', Validators.required],
+      phone: ['', [Validators.maxLength(10),  Validators.pattern(GC.REGEX.MOBILE_NUMER), Validators.required]],
     })
   }
 
@@ -44,5 +45,12 @@ export class RegistrationComponent implements OnInit {
   onloginclick(){
     this.router.navigate(['/login'])
   }
+
+  isFieldInvalid(fieldType: string): boolean {
+    return this.companyInfoFormControl[fieldType]?.invalid &&
+      (this.companyInfoFormControl[fieldType]?.touched || this.companyInfoFormControl[fieldType]?.dirty);
+  }
+  
+  get companyInfoFormControl() { return this.inputForm?.controls };
 
 }

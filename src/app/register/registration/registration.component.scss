@@ -1,0 +1,15 @@
+.custom-error .custom-input-error,
+.custom-error .p-dropdown,
+.custom-error .p-calendar .p-inputtext {
+    border-color: red;
+}
+
+.custom-error .custom-label-error {
+    color: red;
+}
+
+.custom-error .custom-error-text {
+    color: red;
+    font-size: 12px;
+    display: inline-block;
+}

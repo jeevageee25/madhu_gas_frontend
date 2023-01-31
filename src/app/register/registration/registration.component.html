@@ -7,17 +7,23 @@
             <form [formGroup]="inputForm">
     <div class="row ">
     <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-xs-12">
-        <div class="form-group">
+        <div class="form-group" [ngClass]="isFieldInvalid('first_name') ? 'custom-error' : ''">
             <div class="custom-label">First Name <span class='mandate'>*</span></div>
             <input style='width: 100%;' autocomplete="off" type="text" id="rate" pInputText
                 formControlName="first_name" placeholder="Enter First Name">
+                <ng-container *ngIf="companyInfoFormControl['first_name']?.errors?.['pattern']">
+                    <span class="custom-error-text">First Name is Invalid</span>
+                </ng-container>
         </div>
     </div>
     <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-xs-12">
-        <div class="form-group">
+        <div class="form-group" [ngClass]="isFieldInvalid('last_name') ? 'custom-error' : ''">
             <div class="custom-label">Last Name <span class='mandate'>*</span></div>
             <input style='width: 100%;' autocomplete="off" type="text" id="rate" pInputText
                 formControlName="last_name" placeholder="Enter Last Name ">
+                <ng-container *ngIf="companyInfoFormControl['last_name']?.errors?.['pattern']">
+                    <span class="custom-error-text">Last Name is Invalid</span>
+                </ng-container>
         </div>
     </div>
     <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-xs-12">
@@ -35,10 +41,16 @@
         </div>
     </div>
     <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-xs-12">
-        <div class="form-group">
+        <div class="form-group" [ngClass]="isFieldInvalid('phone') ? 'custom-error' : ''">
             <div class="custom-label">Phone<span class='mandate'>*</span></div>
-            <input style='width: 100%;' autocomplete="off" type="number" id="rate" pInputText
+            <input style='width: 100%;' autocomplete="off" type="text" id="rate" pInputText
                 formControlName="phone" placeholder="Enter Phone">
+                <!-- <ng-container *ngIf="inputForm.get('phone')?.errors?.['pattern'] || inputForm.get('phone')?.errors?.['minlength']">
+                    <span class="custom-error-text dis-blk">Phone Number is Invalid</span>
+                </ng-container> -->
+                <ng-container *ngIf="inputForm.get('phone')?.errors?.['maxlength']">
+                    <span class="custom-error-text dis-blk">Phone Number should not be greater than 10 digits</span>
+                </ng-container>
         </div>
     </div>
     <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-xs-12"
